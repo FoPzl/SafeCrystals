@@ -5,9 +5,9 @@ authors: [totemo, bermudalocket]
 description: ${project.description}
 website: ${project.url}
 main: nu.nerd.safecrystals.SafeCrystals
-api-version: 1.15
+api-version: 1.16
 
-depend: [WorldGuard]
+depend: {}
 
 permissions: {}
 
