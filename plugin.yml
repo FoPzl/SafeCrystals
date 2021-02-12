@@ -7,7 +7,7 @@ website: ${project.url}
 main: nu.nerd.safecrystals.SafeCrystals
 api-version: 1.16
 
-depend: {}
+depend: []
 
 permissions: {}
 
