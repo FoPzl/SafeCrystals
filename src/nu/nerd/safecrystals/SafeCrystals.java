@@ -19,18 +19,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
-import com.sk89q.worldguard.LocalPlayer;
-import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-
 // ----------------------------------------------------------------------------
 /**
  * Prevent Ender Crystals from exploding and breaking blocks or damaging
  * entities.
- *
- * Players who have permission to build in a WorldGuard region can break the
- * crystals into dropped items.
  *
  * WorldGuard build permission is checked before allowing a player to place an
  * Ender Crystal in a region.
@@ -56,7 +48,6 @@ public class SafeCrystals extends JavaPlugin implements Listener {
         saveDefaultConfig();
         CONFIG.reload();
 
-        _worldGuard = (WorldGuardPlugin) getServer().getPluginManager().getPlugin("WorldGuard");
         Bukkit.getPluginManager().registerEvents(this, this);
     }
 
@@ -179,9 +170,7 @@ public class SafeCrystals extends JavaPlugin implements Listener {
      * @return true if the given player can build at the given location.
      */
     private boolean canBuild(Player player, Location location) {
-        com.sk89q.worldedit.util.Location wrappedLocation = BukkitAdapter.adapt(location);
-        LocalPlayer localPlayer = _worldGuard.wrapPlayer(player);
-        return WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(wrappedLocation, localPlayer);
+        return true;
     }
 
     // ------------------------------------------------------------------------
@@ -200,10 +189,4 @@ public class SafeCrystals extends JavaPlugin implements Listener {
         return loc.getWorld().getEnvironment() == Environment.THE_END &&
                blockUnder != null && blockUnder.getType() == Material.BEDROCK;
     }
-
-    // ------------------------------------------------------------------------
-    /**
-     * Reference to WorldGuard.
-     */
-    protected WorldGuardPlugin _worldGuard;
 } // class SafeCrystals
